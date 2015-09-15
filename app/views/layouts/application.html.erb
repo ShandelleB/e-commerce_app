@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <title>E-Commerce App</title>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+  <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+  <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+  <%= csrf_meta_tags %>
+</head>
+<body>
+  
+  <nav class="navbar navbar-custom">
+  <div class="container-fluid">
+    <!-- Brand and toggle get grouped for better mobile display -->
+    <div class="navbar-custom">
+      <%= link_to "The Store", root_path, class: "navbar-brand" %>
+    </div>
+    <!-- Collect the nav links, forms, and other content for toggling -->
+    <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
+      <ul class="nav navbar-nav">
+        
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Find by Category <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <% Category.all.each do |cat| %>
+            <li><%= link_to cat.name, categorical_path(cat_id: cat.id) %></li>
+            <% end %>
+          </ul>
+        </li>
+        <li class="dropdown">
+          <a href="#" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-expanded="false">Find by Brand <span class="caret"></span></a>
+          <ul class="dropdown-menu" role="menu">
+            <% @brands.each do |brand| %>
+            <li><%= link_to brand, branding_path(brand: brand) %></li>
+            <% end %>
+          </ul>
+        </li>
+        </ul>
+
+      <ul class="nav navbar-nav navbar-right">
+        <li><%= link_to "My Cart", view_order_path %></li>
+        <% if user_signed_in? %>
+        <li><%= link_to "Sign Out", destroy_user_session_path, method: :delete %></li>
+        <% else %>
+        <li><%= link_to "Sign Up", new_user_registration_path %></li>
+        <li><%= link_to "Forgot Password", new_user_password_path %></li>
+        <% end %>
+      </ul>
+    </div>
+  </div>
+</nav>
+
+
+  
+<div class="container">
+
+<%= yield %>
+</div>
+</body>
+</html>
