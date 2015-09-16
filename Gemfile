@@ -17,6 +17,10 @@ gem 'devise'
 
 gem 'cancancan'
 
+gem 'stripe', :git => 'https://github.com/stripe/stripe-ruby'
+
+gem 'figaro'
+
 gem 'paperclip'
 # Use jquery as the JavaScript library
 gem 'jquery-rails'
